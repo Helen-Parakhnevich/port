@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "cargo": 100,
+    "loaded": true
+  },
+  {
+    "id": 2,
+    "cargo": 200,
+    "loaded": false
+  },
+  {
+    "id": 3,
+    "cargo": 50,
+    "loaded": false
+  },
+  {
+    "id": 4,
+    "cargo": 300,
+    "loaded": true
+  }
+]
