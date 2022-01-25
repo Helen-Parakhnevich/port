@@ -10,16 +10,16 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Main {
+public class PortManager {
 
-    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    private static final String FILE_PATH = "src/main/resources/ships.json";
+    private static final Logger LOGGER = LogManager.getLogger(PortManager.class);
 
     public static void main(String[] args) {
-
         try {
             DataReader reader = new DataReader();
-            List<Ship> ships = reader.read("src/main/resources/ships.json");
-            
+            List<Ship> ships = reader.read(FILE_PATH);
+
             ExecutorService service = Executors.newFixedThreadPool(ships.size());
             ships.forEach(service::submit);
             service.shutdown();
