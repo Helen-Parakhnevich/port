@@ -56,7 +56,6 @@ public class Port {
     }
 
     public static Port getInstance() {
-
         if (instance == null) {
             synchronized (Port.class) {
                 if (instance == null) {
