@@ -47,32 +47,12 @@ public class Ship implements Runnable {
         Port port = Port.getInstance();
 
         Dock currentDock = port.takeDock();
-        LOGGER.info("Ship " + id + " arrived at the dock №" + (currentDock.getId() + 1));
-        if (loaded) {
-            download();
-        } else {
-            upload();
-        }
+        LOGGER.info("Ship " + id + " arrived at the dock №" + (currentDock.getId() + 1) +
+                    (loaded?" to unload ":" to load. Its capacity ") +  cargo + " containers.");
+        int processed = port.shipLoadUnload(id, cargo, loaded);
         port.releaseDock(currentDock);
-        LOGGER.info("Ship " + id + " left at the dock №" + (currentDock.getId() + 1));
-    }
-
-    public void upload() {
-        LOGGER.info("Ship " + id + " uploading in the process " + cargo + " containers");
-        try {
-            TimeUnit.SECONDS.sleep((long) 0.8 * cargo);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void download() {
-        LOGGER.info("Ship " + id + " downloading in the process " + cargo + " containers");
-        try {
-            TimeUnit.SECONDS.sleep((long) 0.5 * cargo);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        LOGGER.info("Ship " + id + " left at the dock №" + (currentDock.getId() + 1) +
+                     ". On board " + (loaded?cargo-processed:processed) + " containers.");
     }
 
     @Override
